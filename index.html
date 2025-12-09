@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statisztika teszt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #4CAF50;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .question.active {
+            display: block;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .options {
+            margin-left: 20px;
+            display: block;
+        }
+        
+        .option {
+            margin: 10px 0;
+            display: block;
+        }
+        
+        .option input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .answer-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            margin-top: 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+        
+        .question-counter {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        
+        .next-btn {
+            display: none;
+            width: 200px;
+            margin: 10px auto;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 15px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        
+        .correct-answer {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #155724;
+        }
+        
+        .final-result {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e7d32;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Statisztika teszt</h1>
+        
+        <!-- Kérdés 1 -->
+        <div class="question" data-question="1">
+            <div class="question-text">1. A többváltozós rangkorrelációs együttható értéke 0,6. Mire következtethetünk?</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q1" value="a"> Egyenes irányú kapcsolat van. Mivel az együttható értéke 0,7-nél nagyobb így a kapcsolat közepes erősségű.</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(1)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+        
+        <!-- Kérdés 2 -->
+        <div class="question" data-question="2">
+            <div class="question-text">2. A parciális korrelációs együttható:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q2" value="a"> a. megmutatja, két elemzett változó kapcsolatának szorosságát, kiszűrve a többi változó hatását ezekből</label>
+                <label class="option"><input type="checkbox" name="q2" value="b"> b. megmutatja, hogy a magyarázóváltozók együttesen milyen kapcsolatban vannak az eredményváltozóval</label>
+                <label class="option"><input type="checkbox" name="q2" value="c"> c. megmutatja, hogy a magyarázóváltozók együttesen hány százalékát magyarázzák az eredményváltozó varianciájának</label>
+                <label class="option"><input type="checkbox" name="q2" value="d"> d. értékét a korrelációs mátrix megfelelő eleme alapján számbsjuk</label>
+                <label class="option"><input type="checkbox" name="q2" value="e"> e. értékét a korrelációs mátrix inverzének megfelelő eleme alapján számoljuk</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(2)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+        
+        <!-- Kérdés 3 -->
+        <div class="question" data-question="3">
+            <div class="question-text">3. A többszörös korrelációs együttható:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q3" value="a"> a. értékét a korrelációs mátrix inverzének megfelelő eleme alapján számoljuk</label>
+                <label class="option"><input type="checkbox" name="q3" value="b"> b. megmutatja, hogy a magyarázóváltozók együttesen milyen kapcsolatban vannak az eredményváltozóval</label>
+                <label class="option"><input type="checkbox" name="q3" value="c"> c. megmutatja, a magyarázóváltozó és az eredményváltozó kapcsolatának szorosságát kiszűrve a többi változó hatását</label>
+                <label class="option"><input type="checkbox" name="q3" value="d"> d. megmutatja, hogy a magyarázóváltozók együttesen hány százalékát magyarázzák az eredményváltozó varianciájának</label>
+                <label class="option"><input type="checkbox" name="q3" value="e"> e. értékét a korrelációs mátrix megfelelő eleme alapján számoljuk</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(3)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+        
+        <!-- Kérdés 4 -->
+        <div class="question" data-question="4">
+            <div class="question-text">4. Milyen következménye van annak, ha egy khi-négyzet próba során (5%-os szignifikancia szint mellett meghatározott) a küszöbérték kisebb, mint a khi-négyzet értéke?</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q4" value="a"> Elvetjük a nullhipotézist, és elvetjük az alternatív hipotézist, vagyis 95 %-os valószínűséggel állíthatjuk, hogy a két változó között nincs asszociációs kapcsolat.</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(4)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+        
+        <!-- Kérdés 5 -->
+        <div class="question" data-question="5">
+            <div class="question-text">5. A determinációs együttható értéke:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q5" value="a"> a. annál nagyobb, minél kisebb a relatív hiba</label>
+                <label class="option"><input type="checkbox" name="q5" value="b"> b. megmutatja, hogy a magyarázóváltozó hány százalékban magyarázza az eredményváltozót</label>
+                <label class="option"><input type="checkbox" name="q5" value="c"> c. függ az eredményváltozó tényleges értékeinek számtani átlagának különbségétől</label>
+                <label class="option"><input type="checkbox" name="q5" value="d"> d. függ az eredményváltozó tényleges értékeinek és becsült értékeinek különbségétől</label>
+                <label class="option"><input type="checkbox" name="q5" value="e"> e. függ az eredményváltozó tényleges értékeinek és becsült értékeinek összegétől</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(5)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback5"></div>
+        </div>
+        
+        <!-- Kérdés 6 -->
+        <div class="question" data-question="6">
+            <div class="question-text">6. Khi-négyzet próbára igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q6" value="a"> a. az elméleti gyakoriságok azt az eloszlást mutatják, amikor a két változó között maximális erősségű az asszociációs kapcsolat</label>
+                <label class="option"><input type="checkbox" name="q6" value="b"> b. a nullhipotézis szerint nincs asszociációs kapcsolat a két változó között</label>
+                <label class="option"><input type="checkbox" name="q6" value="c"> c. ha a khi-négyzet értéke kisebb a küszöbértéknél, a két változó között nincs asszociációs kapcsolat</label>
+                <label class="option"><input type="checkbox" name="q6" value="d"> d. a Pearson-féle asszociációs együttható annál nagyobb, minél nagyobb a khi-négyzet értéke</label>
+                <label class="option"><input type="checkbox" name="q6" value="e"> e. a küszöbértéket a szabadságfok határozza meg</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(6)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback6"></div>
+        </div>
+        
+        <!-- Kérdés 7 -->
+        <div class="question" data-question="7">
+            <div class="question-text">7. Két változó közötti kapcsolat elemzésére az asszociációs elemzési módszert alkalmazhatjuk, ha:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q7" value="a"> a. mindkét változó minőségi változó</label>
+                <label class="option"><input type="checkbox" name="q7" value="b"> b. az egyik mennyiségi változó, a másik pedig nem mennyiségi változó</label>
+                <label class="option"><input type="checkbox" name="q7" value="c"> c. a változókat nominális skálán mérjük</label>
+                <label class="option"><input type="checkbox" name="q7" value="d"> d. az egyik minőségi változó, a másik pedig területi változó</label>
+                <label class="option"><input type="checkbox" name="q7" value="e"> e. mindkét változó területi változó</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(7)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback7"></div>
+        </div>
+        
+        <!-- Kérdés 8 -->
+        <div class="question" data-question="8">
+            <div class="question-text">8. A vegyes kapcsolatelemzés során számolt szórásnégyzet-hányados:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q8" value="a"> a. megmutatja, hogy a mennyiségi ismérv hány százalékban magyarázza a nem mennyiségi ismérv varianciáját</label>
+                <label class="option"><input type="checkbox" name="q8" value="b"> b. a külsó szórás és a teljes szórás hányadosaként számolható ki</label>
+                <label class="option"><input type="checkbox" name="q8" value="c"> c. megmutatja, hogy a nem mennyiségi ismérv hány százalékban magyarázza a mennyiségi ismérv varianciáját</label>
+                <label class="option"><input type="checkbox" name="q8" value="d"> d. értéke minél közelebb van nullához, annál gyengébb a kapcsolat a két változó között</label>
+                <label class="option"><input type="checkbox" name="q8" value="e"> e. kiszámolható, mint a szóráshányados értékének a négyzete</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(8)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback8"></div>
+        </div>
+        
+        <!-- Kérdés 9 -->
+        <div class="question" data-question="9">
+            <div class="question-text">9. A vegyes kapcsolatelemzés során számolt szóráshányados:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q9" value="a"> a. megmutatja, hogy a nem mennyiségi ismérv hány százalékban magyarázza a mennyiségi ismérv varianciáját</label>
+                <label class="option"><input type="checkbox" name="q9" value="b"> b. értéke minél közelebb van nullához, annál gyengébb a kapcsolat a két változó között</label>
+                <label class="option"><input type="checkbox" name="q9" value="c"> c. a külsó szórás és a belső szórás hányadosaként számolható ki</label>
+                <label class="option"><input type="checkbox" name="q9" value="d"> d. értéke minél közelebb van egyhez, a nem mennyiségi ismérv annál nagyobb százalékban magyarázza a mennyiségi ismérv varianciáját</label>
+                <label class="option"><input type="checkbox" name="q9" value="e"> e. megegyezik a szórásnégyzet-hányados gyökös értékével</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(9)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback9"></div>
+        </div>
+        
+        <!-- Kérdés 10 -->
+        <div class="question" data-question="10">
+            <div class="question-text">10. Két változó közötti kapcsolat elemzésére a korrelációszámítás módszerét alkalmazhatjuk:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q10" value="a"> a. az egyik területi változó a másik mennyiségi változó</label>
+                <label class="option"><input type="checkbox" name="q10" value="b"> b. a változókat arányskálán mérjük</label>
+                <label class="option"><input type="checkbox" name="q10" value="c"> c. a változókat intervallumskálán mérjük</label>
+                <label class="option"><input type="checkbox" name="q10" value="d"> d. mindkét változó mennyiségi változó</label>
+                <label class="option"><input type="checkbox" name="q10" value="e"> e. az egyik mennyiségi változó, a másik pedig nem mennyiségi változó</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(10)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback10"></div>
+        </div>
+        
+        <!-- Kérdés 11 -->
+        <div class="question" data-question="11">
+            <div class="question-text">11. A külső szórás:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q11" value="a"> a. megmutatja, hogy a sokaság egységeihez tartozó ismérvértékek átlagosan mennyivel ternek el saját részsokaságuk átlagától</label>
+                <label class="option"><input type="checkbox" name="q11" value="b"> b. megmutatja, hogy a részsokaságok átlagal átlagosan mennyivel térmnek el a fósokaság átlagától</label>
+                <label class="option"><input type="checkbox" name="q11" value="c"> c. mértékegysége megegyezik a változó mértékegységével</label>
+                <label class="option"><input type="checkbox" name="q11" value="d"> d. értéket meghatározza a reszátlagok és a foátlag közötti különbségek négyzetes atlaga</label>
+                <label class="option"><input type="checkbox" name="q11" value="e"> e. mértékegység nélküli szám</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(11)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback11"></div>
+        </div>
+        
+        <!-- Kérdés 12 -->
+        <div class="question" data-question="12">
+            <div class="question-text">12. Khi négyzet próbára igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q12" value="a"> a. ha a khi négyzet értéke kisebb a küszöbértéknél, a két változó között nincs asszociációs kapcsolat</label>
+                <label class="option"><input type="checkbox" name="q12" value="b"> b. a küszöbértéket a szabadságfok határozza meg</label>
+                <label class="option"><input type="checkbox" name="q12" value="c"> c. az elméleti gyakoriságot azt az eloszlást mutatják amikor két változó között maximális erősségű az asszociációs kapcsolat</label>
+                <label class="option"><input type="checkbox" name="q12" value="d"> d. a Pearson féle asszociácós együttható annál nagyobb minél nagyobb a khi négyzet értéke</label>
+                <label class="option"><input type="checkbox" name="q12" value="e"> e. a nullhipotézis szerint nincs asszociációs kapcsolat a két változó között</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(12)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback12"></div>
+        </div>
+        
+        <!-- Kérdés 13 -->
+        <div class="question" data-question="13">
+            <div class="question-text">13. A több, mint 2 változóra számolt rangkorrelációs együttható:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q13" value="a"> a. Akkor számolható, ha a változókat ordinális skálán mérjük</label>
+                <label class="option"><input type="checkbox" name="q13" value="b"> b. Ha értéke pozitív akkor a változók között pozitív kapcsolat van</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(13)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback13"></div>
+        </div>
+        
+        <div class="final-result" id="finalResult"></div>
+    </div>
+    
+    <script>
+        // Helyes válaszok definiálása
+        const correctAnswers = {
+            1: ['a'],
+            2: ['a', 'e'],
+            3: ['a', 'b'],
+            4: ['a'],
+            5: ['a', 'b', 'd'],
+            6: ['b', 'c', 'd', 'e'],
+            7: ['a', 'c', 'd', 'e'],
+            8: ['c', 'd', 'e'],
+            9: ['b', 'd', 'e'],
+            10: ['b', 'c', 'd'],
+            11: ['b', 'c', 'd'],
+            12: ['a', 'b', 'd', 'e'],
+            13: ['a', 'b']
+        };
+        
+        let answeredQuestions = new Set();
+        let correctCount = 0;
+        let currentQuestion = 1;
+        let questionOrder = [];
+        
+        // Véletlen sorrend generálása
+        function generateRandomOrder() {
+            const totalQuestions = Object.keys(correctAnswers).length;
+            questionOrder = Array.from({length: totalQuestions}, (_, i) => i + 1);
+            
+            // Fisher-Yates shuffle
+            for (let i = questionOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questionOrder[i], questionOrder[j]] = [questionOrder[j], questionOrder[i]];
+            }
+        }
+        
+        // Első kérdés megjelenítése
+        document.addEventListener('DOMContentLoaded', function() {
+            generateRandomOrder();
+            showQuestion(questionOrder[0]);
+        });
+        
+        function showQuestion(questionNumber) {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(q => q.classList.remove('active'));
+            
+            const currentQ = document.querySelector(`.question[data-question="${questionNumber}"]`);
+            if (currentQ) {
+                currentQ.classList.add('active');
+            }
+        }
+        
+        function checkQuestion(questionNumber) {
+            if (answeredQuestions.has(questionNumber)) {
+                return; // Már megválaszolt kérdés
+            }
+            
+            const checkboxes = document.querySelectorAll(`input[name="q${questionNumber}"]:checked`);
+            const userAnswers = Array.from(checkboxes).map(cb => cb.value);
+            const correct = correctAnswers[questionNumber];
+            const feedbackDiv = document.getElementById(`feedback${questionNumber}`);
+            
+            // Ellenőrzés: azonos válaszok vannak-e
+            const isCorrect = userAnswers.length === correct.length && 
+                             userAnswers.every(ans => correct.includes(ans));
+            
+            if (isCorrect) {
+                feedbackDiv.className = 'feedback correct';
+                feedbackDiv.innerHTML = '✓ Helyes válasz!';
+                correctCount++;
+            } else {
+                feedbackDiv.className = 'feedback incorrect';
+                let correctText = 'A helyes válasz(ok): ' + correct.map(v => v).join(', ');
+                feedbackDiv.innerHTML = '✗ Helytelen válasz!<div class="correct-answer">' + correctText + '</div>';
+            }
+            
+            feedbackDiv.style.display = 'block';
+            answeredQuestions.add(questionNumber);
+            
+            // Letiltjuk a checkboxokat és a submit gombot
+            const allCheckboxes = document.querySelectorAll(`input[name="q${questionNumber}"]`);
+            allCheckboxes.forEach(cb => cb.disabled = true);
+            event.target.style.display = 'none';
+            
+            // Megjelenítjük a következő gombot
+            const currentQ = document.querySelector(`.question[data-question="${questionNumber}"]`);
+            const nextBtn = currentQ.querySelector('.next-btn');
+            nextBtn.style.display = 'block';
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion <= questionOrder.length) {
+                showQuestion(questionOrder[currentQuestion - 1]);
+            } else {
+                showFinalResult();
+            }
+        }
+        
+        function showFinalResult() {
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const percentage = ((correctCount / totalQuestions) * 100).toFixed(1);
+            const finalResultDiv = document.getElementById('finalResult');
+            
+            finalResultDiv.innerHTML = `
+                <h2>Teszt befejezve!</h2>
+                <p>Helyes válaszok: ${correctCount} / ${totalQuestions}</p>
+                <p>Pontosság: ${percentage}%</p>
+            `;
+            finalResultDiv.style.display = 'block';
+            finalResultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
