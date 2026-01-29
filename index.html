@@ -171,11 +171,50 @@
             color: #2e7d32;
             display: none;
         }
+        
+        .exam-selector {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        
+        .exam-selector h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .exam-selector label {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        .exam-selector input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Statisztika teszt</h1>
+        
+        <div class="exam-selector">
+            <h2>Válassz vizsgát:</h2>
+            <label>
+                <input type="radio" name="exam" value="elso" checked onchange="loadExam()"> Első parci
+            </label>
+            <label>
+                <input type="radio" name="exam" value="masodik" onchange="loadExam()"> Második parci
+            </label>
+            <label>
+                <input type="radio" name="exam" value="harmadik" onchange="loadExam()"> Harmadik vizsga
+            </label>
+        </div>
         
         <!-- Kérdés 1 -->
         <div class="question" data-question="1">
@@ -361,12 +400,597 @@
             <div class="feedback" id="feedback13"></div>
         </div>
         
+        <!-- Második parci kérdések -->
+        <div class="question second-exam" data-question="101">
+            <div class="question-text">101. Tündérország munkanélküli lakosságát életkoruk szerint tanulmányozzuk. A populációt jellemző medián értéke 42,3 év. Értelmezze ezt a mutatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(101, 'Tündérországban a munkanélküli lakosság 50%-a 42,3 éves vagy annál kevesebb és 50%-a 42,3 éves vagy annál több.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback101"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="102">
+            <div class="question-text">102. Egy sokaság jövedelmi Herfindahl-indexére igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q102" value="a"> a. az indexszám értékét csak a legnagyobb jövedelmek befolyásolják</label>
+                <label class="option"><input type="checkbox" name="q102" value="b"> b. tökéletesen egyenletes eloszlás esetén (ha nincs koncentráció) a mutató értéke 100%</label>
+                <label class="option"><input type="checkbox" name="q102" value="c"> c. az indexszám értékét csak a legkisebb jövedelmek befolyásolják</label>
+                <label class="option"><input type="checkbox" name="q102" value="d"> d. az indexszám értékét minden jövedelem nagysága befolyásolja</label>
+                <label class="option"><input type="checkbox" name="q102" value="e"> e. minimális értékét a sokaság elemszámának reciprok értékénél éri el</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(102)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback102"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="103">
+            <div class="question-text">103. A külső szórás:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q103" value="a"> a. mértékegysége megegyezik a változó mértékegységével</label>
+                <label class="option"><input type="checkbox" name="q103" value="b"> b. megmutatja, hogy a sokaság egységeihez tartozó ismérvértékek átlagosan mennyivel térnek el saját részsokaságuk átlagától</label>
+                <label class="option"><input type="checkbox" name="q103" value="c"> c. értékét meghatározza a részátlagok és a főátlag közötti különbségek négyzetes átlaga</label>
+                <label class="option"><input type="checkbox" name="q103" value="d"> d. mértékegység nélküli szám</label>
+                <label class="option"><input type="checkbox" name="q103" value="e"> e. megmutatja, hogy a részsokaságok átlagai átlagosan mennyivel térnek el a fősokaság átlagától</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(103)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback103"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="104">
+            <div class="question-text">104. A súlyozott kronologikus átlag mutató esetében igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q104" value="a"> a. álló sokaság esetén számítható</label>
+                <label class="option"><input type="checkbox" name="q104" value="b"> b. a súlyozótényező az adatok különböző időköze</label>
+                <label class="option"><input type="checkbox" name="q104" value="c"> c. a súlyozótényező a részsokaságok elemszáma</label>
+                <label class="option"><input type="checkbox" name="q104" value="d"> d. mozgó sokaság esetén számítható</label>
+                <label class="option"><input type="checkbox" name="q104" value="e"> e. az idősor egyes időszakjai közötti változások intenzitásának a jellemzésére szolgáló mutatószám</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(104)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback104"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="105">
+            <div class="question-text">105. Egy statisztikai sokaságra számolt különböző mutatók esetében igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q105" value="a"> a. a kvartilisek mértékegysége a %</label>
+                <label class="option"><input type="checkbox" name="q105" value="b"> b. a szórás nagyobb, mint az átlagos abszolút eltérés</label>
+                <label class="option"><input type="checkbox" name="q105" value="c"> c. a mértani átlag kisebb, mint a négyzetes átlag</label>
+                <label class="option"><input type="checkbox" name="q105" value="d"> d. folytonos mennyiségi változó esetén számolt kvartilisek a modális intervallumba esnek</label>
+                <label class="option"><input type="checkbox" name="q105" value="e"> e. a módusz értékénél biztosan ugyanannyi nagyobb, mint kisebb értékű elem van egy rendezett értéksorban</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(105)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback105"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="106">
+            <div class="question-text">106. Egy statisztika változó típusa szerint lehet:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q106" value="a"> a. alternatív</label>
+                <label class="option"><input type="checkbox" name="q106" value="b"> b. folytonos mennyiség</label>
+                <label class="option"><input type="checkbox" name="q106" value="c"> c. folytonos területi</label>
+                <label class="option"><input type="checkbox" name="q106" value="d"> d. minőségi</label>
+                <label class="option"><input type="checkbox" name="q106" value="e"> e. mozgó</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(106)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback106"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="107">
+            <div class="question-text">107. A következő adatsor a romániai nettó átlagbér értékét mutatja az év hatodik hónapjában. 2017-ben: 2380 lej, 2018-ban: 2721 lej, 2019-ben: 3142 lej, 2020-ban: 3298 lej. Tudván, hogy 2018 a bázisév, számolja ki a bázisviszonyszámot és a láncviszonyszámot a 2020-as évre! Ezt követően értelmezze mindkét eredményt!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(107, 'bázisviszonyszám: 3298/2721 = 1,2120 = 121,20% A 2020-as év nettó átlagbére 121,20%-a volt a 2018-as év nettó átlagbérének. láncviszonyszám: 3298/3142 = 1,0496 = 104,96% A 2020-as év nettó átlagbére 104,96%-a volt a 2019-es év nettó átlagbérének.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback107"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="108">
+            <div class="question-text">108. Egy arányskálán:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q108" value="a"> a. értelmezni lehet az értékek közötti szorzatokat is és az arányokat is</label>
+                <label class="option"><input type="checkbox" name="q108" value="b"> b. értelmezni lehet az értékek összegét</label>
+                <label class="option"><input type="checkbox" name="q108" value="c"> c. nem lehet értelmezni az értékek közötti szorzatokat, csak az arányokat</label>
+                <label class="option"><input type="checkbox" name="q108" value="d"> d. nem lehet értelmezni sem szorzatokat sem összegeket, csak a sorrendiségre következtethetünk</label>
+                <label class="option"><input type="checkbox" name="q108" value="e"> e. nem lehet értelmezni az értékek közötti különbségeket, mert ez az intervallumskálára jellemző</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(108)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback108"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="109">
+            <div class="question-text">109. Ha egy eloszlásfüggvény grafikus képe bal oldali aszimmetriát mutat, akkor:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q109" value="a"> a. a számtani átlag kisebb, mint a módusz</label>
+                <label class="option"><input type="checkbox" name="q109" value="b"> b. a medián kisebb, mint a számtani átlag</label>
+                <label class="option"><input type="checkbox" name="q109" value="c"> c. a módusz nagyobb, mint a medián</label>
+                <label class="option"><input type="checkbox" name="q109" value="d"> d. a medián nem reprezentatív</label>
+                <label class="option"><input type="checkbox" name="q109" value="e"> e. az alfa mutató értéke kisebb, mint zéró</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(109)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback109"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="110">
+            <div class="question-text">110. Tündérország munkanélküli lakosságát életkoruk szerint tanulmányozzuk. A populációt jellemző harmadik decilis értéke 29,2 év. Értelmezze ezt a mutatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(110, 'A Tündérországi munkanélküli lakosság 30%-a 29,2 éves vagy ennél fiatalabb, 70%-a 29,2 éves vagy ennél idősebb.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback110"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="111">
+            <div class="question-text">111. A kolozsvári egyetemistákat születési megyéjük alapján vizsgáljuk. Milyen típusú változó a születési megye? Írjon le legalább két ismérváltozatot erre az esetre!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(111, 'A születési megye területi változó. Szatmár megye, Kolozs megye.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback111"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="112">
+            <div class="question-text">112. Egy statisztikai sokaságra számolt különböző mutatók esetében igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q112" value="a"> a. a medián nagyobb, mint a harmadik kvartilis</label>
+                <label class="option"><input type="checkbox" name="q112" value="b"> b. a számtani átlag kisebb, mint a négyzetes átlag</label>
+                <label class="option"><input type="checkbox" name="q112" value="c"> c. a szórás nagyobb, mint az átlagos abszolút eltérés</label>
+                <label class="option"><input type="checkbox" name="q112" value="d"> d. a harmadik kvartilis kisebb, mint a hatodik decilis</label>
+                <label class="option"><input type="checkbox" name="q112" value="e"> e. a mértani átlag nagyobb, mint a számtani átlag</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(112)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback112"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="113">
+            <div class="question-text">113. Tündérország munkanélküli lakosságát életkoruk szerint tanulmányozzuk. A populációt jellemző első kvartilis értéke 26,1 év. Értelmezze ezt a mutatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(113, 'A lakosság 25%-a 26,1 évnél kisebb és 75%-a 26,1 évnél idősebb.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback113"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="114">
+            <div class="question-text">114. Két változó közötti kapcsolat elemzésére az asszociációs elemzési módszert alkalmazhatjuk, ha:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q114" value="a"> a. mindkét változó minőségi változó</label>
+                <label class="option"><input type="checkbox" name="q114" value="b"> b. az egyik mennyiségi változó, a másik pedig nem mennyiségi változó</label>
+                <label class="option"><input type="checkbox" name="q114" value="c"> c. a változókat nominális skálán mérjük</label>
+                <label class="option"><input type="checkbox" name="q114" value="d"> d. az egyik minőségi változó, a másik pedig területi változó</label>
+                <label class="option"><input type="checkbox" name="q114" value="e"> e. mindkét változó területi változó</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(114)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback114"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="115">
+            <div class="question-text">115. Idősoros adatok esetén az átlagos relatív változás:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q115" value="a"> a. megmutatja, hogy az elemzett időszak során periódusonként átlagosan hányszorosára változott az idősor értéke</label>
+                <label class="option"><input type="checkbox" name="q115" value="b"> b. az idősort jellemzi az adatok átlagos értékén keresztül</label>
+                <label class="option"><input type="checkbox" name="q115" value="c"> c. megmutatja, hogy az elemzett időszak során periódusonként átlagosan hány egységgel változott az idősor értéke</label>
+                <label class="option"><input type="checkbox" name="q115" value="d"> d. mértékegysége megegyezik az idősoros adatok mértékegységével</label>
+                <label class="option"><input type="checkbox" name="q115" value="e"> e. nem egyezik meg az idősor kezdeti és végső adatának relatív változása és a periódusok számának arányával</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(115)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback115"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="116">
+            <div class="question-text">116. Ugyanazon a mérési skálán egy eredmény 3-as értéket kap, egy másik eredmény 5-öst. Ha a két érték összehasonlítása során egyértelműen eldönthető, melyik a jobb érték, akkor a mérést:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q116" value="a"> a. nominális skálán végeztük</label>
+                <label class="option"><input type="checkbox" name="q116" value="b"> b. ordinális skálán végeztük</label>
+                <label class="option"><input type="checkbox" name="q116" value="c"> c. dinamikus viszonyskálán végeztük</label>
+                <label class="option"><input type="checkbox" name="q116" value="d"> d. arányskálán végeztük</label>
+                <label class="option"><input type="checkbox" name="q116" value="e"> e. intervallum skálán végeztük</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(116)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback116"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="117">
+            <div class="question-text">117. Egy statisztikai sokaságra számolt különböző mutatók esetében igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q117" value="a"> a. a relatív kvartilis deviáció mértékegysége megegyezik a mennyiségi változó mértékegységével</label>
+                <label class="option"><input type="checkbox" name="q117" value="b"> b. a számtani átlag nagyobb, mint a harmonikus átlag</label>
+                <label class="option"><input type="checkbox" name="q117" value="c"> c. a negyedik decilis nagyobb, mint a medián</label>
+                <label class="option"><input type="checkbox" name="q117" value="d"> d. ha a módusz nagyobb a számtani átlagnál, akkor a medián is nagyobb a számtani átlagnál</label>
+                <label class="option"><input type="checkbox" name="q117" value="e"> e. a harmonikus átlag nagyobb, mint a négyzetes átlag</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(117)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback117"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="118">
+            <div class="question-text">118. Tündérország munkanélküli lakosságát életkoruk szerint tanulmányozzuk. A (30-40) éves korosztályra számolt alulról kumulált relatív gyakoriság értéke 41%. Értelmezze ezt a mutatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(118, 'Tündérország lakosságának 41%-a 40 évnél fiatalabb.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback118"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="119">
+            <div class="question-text">119. Egy sokaság szintjén fokozódik a koncentráció mértéke, akkor:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q119" value="a"> a. a jelenséget szemléltető grafikus ábrán a Lorenz-görbe annál közelebb kerül a szögfelező egyeneshez</label>
+                <label class="option"><input type="checkbox" name="q119" value="b"> b. a koncentrációs arányszám értéke biztosan nő</label>
+                <label class="option"><input type="checkbox" name="q119" value="c"> c. a koncentrációs arányszám értéke biztosan csökken</label>
+                <label class="option"><input type="checkbox" name="q119" value="d"> d. a Herfindahl-index értéke biztosan csökken</label>
+                <label class="option"><input type="checkbox" name="q119" value="e"> e. a Herfindahl-index értéke biztosan nő</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(119)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback119"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="120">
+            <div class="question-text">120. Egy statisztikai sokaságra számolt különböző mutatók esetében igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q120" value="a"> a. a mértani átlag nagyobb, mint a számtani átlag</label>
+                <label class="option"><input type="checkbox" name="q120" value="b"> b. a szórás nagyobb, mint az átlagos abszolút eltérés</label>
+                <label class="option"><input type="checkbox" name="q120" value="c"> c. a medián nagyobb, mint a harmadik kvartilis</label>
+                <label class="option"><input type="checkbox" name="q120" value="d"> d. a számtani átlag kisebb, mint a négyzetes átlag</label>
+                <label class="option"><input type="checkbox" name="q120" value="e"> e. a harmadik kvartilis kisebb, mint a hatodik decilis</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(120)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback120"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="121">
+            <div class="question-text">121. Egy statisztika változó típusa szerint lehet:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q121" value="a"> a. álló</label>
+                <label class="option"><input type="checkbox" name="q121" value="b"> b. mozgó</label>
+                <label class="option"><input type="checkbox" name="q121" value="c"> c. területi</label>
+                <label class="option"><input type="checkbox" name="q121" value="d"> d. időbeli</label>
+                <label class="option"><input type="checkbox" name="q121" value="e"> e. diszkrét mennyiségi</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(121)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback121"></div>
+        </div>
+        
+        <div class="question second-exam" data-question="122">
+            <div class="question-text">122. Két statisztikai sokaságra számolt különböző mutatók esetében igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q122" value="a"> a. a mediánjaik biztosan nagyobbak saját első kvartilisaiknál</label>
+                <label class="option"><input type="checkbox" name="q122" value="b"> b. ha átlagaik értéke megegyezik, nem biztos, hogy mindkét átlag reprezentatív</label>
+                <label class="option"><input type="checkbox" name="q122" value="c"> c. ha moduszaik nagyobbak a számtani átlagaiknál, akkor a mediánjaik is nagyobbak a számtani átlagaiknál</label>
+                <label class="option"><input type="checkbox" name="q122" value="d"> d. ha a szórásaik egyenlőek, akkor a relatív szórásaik is egyenlőek</label>
+                <label class="option"><input type="checkbox" name="q122" value="e"> e. ha a számtani átlagaik egyenlőek, akkor a szórásaik is egyenlőek</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(122)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback122"></div>
+        </div>
+        
+        <!-- Harmadik vizsga kérdések -->
+        <div class="question third-exam" data-question="201">
+            <div class="question-text">201. A regressziós becslés standard hibája:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q201" value="a"> a. mértékegysége megegyezik az eredményváltozó mértékegységével</label>
+                <label class="option"><input type="checkbox" name="q201" value="b"> b. mértékegysége a %</label>
+                <label class="option"><input type="checkbox" name="q201" value="c"> c. mértékegysége megegyezik a magyarázóváltozó mértékegységével</label>
+                <label class="option"><input type="checkbox" name="q201" value="d"> d. megmutatja, hogy az eredményváltozó becsült értékei átlagosan mennyivel térnek el a magyarázóváltozó értékeitől</label>
+                <label class="option"><input type="checkbox" name="q201" value="e"> e. megmutatja, hogy az eredményváltozó becsült értékei átlagosan mennyivel térnek el az eredményváltozó értékeitől</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(201)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback201"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="202">
+            <div class="question-text">202. Exponenciális simítás esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q202" value="a"> a. az idősorban levő tendenciát exponenciális regressziós függvényillesztéssel határozza meg</label>
+                <label class="option"><input type="checkbox" name="q202" value="b"> b. az idősorban levő tendenciát függvényillesztés nélkül határozza meg</label>
+                <label class="option"><input type="checkbox" name="q202" value="c"> c. az átlagos abszolút hiba számszerűsítésekor a becsült értékek és a tényleges értékek abszolút különbségének nagyságaiból kell négyzetes átlagot számolni</label>
+                <label class="option"><input type="checkbox" name="q202" value="d"> d. az alfa simítási paraméter értékének a csökkentésével a becsült értékek grafikus képe simább lesz (kisebb ingadozásokat mutat)</label>
+                <label class="option"><input type="checkbox" name="q202" value="e"> e. másodfokú (kétszeres) simítást lehet alkalmazni, ha az idősorban lineáris trend van és nincs szezonalitás</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(202)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback202"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="203">
+            <div class="question-text">203. A kétváltozós hatványkitevős regressziós összefüggés b paramétere:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q203" value="a"> a. megmutatja, hogy a magyarázóváltozó egy százalékos változása átlagosan hány százalékos változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q203" value="b"> b. megmutatja, hogy a magyarázóváltozó egységnyi változása átlagosan mekkora változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q203" value="c"> c. értéke szignifikánsan különbözik nullától, ha a lineáris segédregresszió paramétertesztjének a p értéke kisebb, mint 0,01</label>
+                <label class="option"><input type="checkbox" name="q203" value="d"> d. megmutatja, hogy a magyarázóváltozó egységnyi változása átlagosan hányszoros változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q203" value="e"> e. megegyezik a regressziós függvény meredekségével</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(203)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback203"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="204">
+            <div class="question-text">204. Exponenciális simítás esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q204" value="a"> a. az átlagos relatív abszolút hiba számszerűsítésekor a becsült értékek és a tényleges értékek abszolút különbségének relatív nagyságaiból kell számtani átlagot számolni</label>
+                <label class="option"><input type="checkbox" name="q204" value="b"> b. elsőfokú (egyszeres) simítást lehet alkalmazni, ha az idősorban nincs trend és szezonalitás</label>
+                <label class="option"><input type="checkbox" name="q204" value="c"> c. az alfa simítási paraméter értékének a növelésével a becsült értékek grafikus képe simább lesz (kisebb ingadozásokat mutat)</label>
+                <label class="option"><input type="checkbox" name="q204" value="d"> d. minél nagyobb az alfa simítási paraméter értéke, az idősor közelmúltbeli értékei annál nagyobb szerepet játszanak a becsült érték meghatározásában</label>
+                <label class="option"><input type="checkbox" name="q204" value="e"> e. az idősorban levő tendenciát exponenciális regressziós függvényillesztéssel határozza meg</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(204)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback204"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="205">
+            <div class="question-text">205. A determinációs együttható értéke:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q205" value="a"> a. annál nagyobb, minél kisebb a relatív hiba</label>
+                <label class="option"><input type="checkbox" name="q205" value="b"> b. megmutatja, hogy a magyarázóváltozó hány százalékban magyarázza az eredményváltozót</label>
+                <label class="option"><input type="checkbox" name="q205" value="c"> c. függ az eredményváltozó tényleges értékeinek számtani átlagának különbségétől</label>
+                <label class="option"><input type="checkbox" name="q205" value="d"> d. függ az eredményváltozó tényleges értékeinek és becsült értékeinek különbségétől</label>
+                <label class="option"><input type="checkbox" name="q205" value="e"> e. függ az eredményváltozó tényleges értékeinek és becsült értékeinek összegétől</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(205)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback205"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="206">
+            <div class="question-text">206. A kétváltozós lineáris regressziós összefüggés b paramétere (a regressziós együttható):</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q206" value="a"> a. megmutatja, hogy a magyarázóváltozó egységnyi változása átlagosan mekkora változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q206" value="b"> b. nem különbözik szignifikánsan nullától, ha az F szignifikanciája nagyobb, mint 0,05</label>
+                <label class="option"><input type="checkbox" name="q206" value="c"> c. csak akkor értelmezhető, ha pozitív előjelű</label>
+                <label class="option"><input type="checkbox" name="q206" value="d"> d. megmutatja, hogy az eredményváltozó egységnyi változása átlagosan mekkora változást idéz elő a magyarázóváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q206" value="e"> e. megegyezik a regressziós egyenes meredekségével</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(206)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback206"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="207">
+            <div class="question-text">207. A hatványkitevős regressziós összefüggés:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q207" value="a"> a. b paramétere megmutatja, hogy a magyarázóváltozó egy százalékos változása átlagosan hány százalékkal változik az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q207" value="b"> b. lineáris segédregressziójának paraméterei: lgY, lgx</label>
+                <label class="option"><input type="checkbox" name="q207" value="c"> c. lineáris segédregressziójának paraméterei: lgY, X</label>
+                <label class="option"><input type="checkbox" name="q207" value="d"> d. lineáris segédregressziójának paraméterei: lga, lgb</label>
+                <label class="option"><input type="checkbox" name="q207" value="e"> e. lineáris segédregressziójának paraméterei: lga, b</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(207)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback207"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="208">
+            <div class="question-text">208. Egy adott adathalmazra becsült két regressziós összefüggés közül az a jobb, amelyik esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q208" value="a"> a. a relatív hiba kisebb</label>
+                <label class="option"><input type="checkbox" name="q208" value="b"> b. a standard hiba nagyobb</label>
+                <label class="option"><input type="checkbox" name="q208" value="c"> c. a determinációs együttható kisebb</label>
+                <label class="option"><input type="checkbox" name="q208" value="d"> d. a magyarázóváltozó tényleges értékei és becsült értékei kevésbé térnek el egymástól</label>
+                <label class="option"><input type="checkbox" name="q208" value="e"> e. a determinációs együttható nagyobb</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(208)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback208"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="209">
+            <div class="question-text">209. Egy adott adathalmazra becsült két regressziós összefüggés közül az a jobb, amelyik esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q209" value="a"> a. a magyarázóváltozó tényleges értékei és becsült értékei kevésbé térnek el egymástól</label>
+                <label class="option"><input type="checkbox" name="q209" value="b"> b. a determinációs együttható kisebb</label>
+                <label class="option"><input type="checkbox" name="q209" value="c"> c. a standard hiba nagyobb</label>
+                <label class="option"><input type="checkbox" name="q209" value="d"> d. a determinációs együttható nagyobb</label>
+                <label class="option"><input type="checkbox" name="q209" value="e"> e. a relatív hiba kisebb</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(209)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback209"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="210">
+            <div class="question-text">210. Ismerjük az alábbi regressziós összefüggést: Y^=2*1,001^X, ahol X (a hatványkitevő) a Mikroökonómia tárgyra fordított felkészülési napok számát mutatja, Y pedig a Mikroökonómia tárgyból elért vizsgapontot. Értelmezze a regressziós összefüggés b paraméterét!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(210, 'A b paraméter arra ad választ hogy a Mikroökonómia tárgyra fordított felkészülési napok száma egy egységnyi változása átlagosan 1,001-szeres változást (növekedést) okoz a Mikroökonómia tárgyból elért vizsgapontokban.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback210"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="211">
+            <div class="question-text">211. A korrigált determinációs együttható:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q211" value="a"> a. korrigálási tényezője a standard hiba</label>
+                <label class="option"><input type="checkbox" name="q211" value="b"> b. korrigálási tényezője a magyarázóváltozók száma</label>
+                <label class="option"><input type="checkbox" name="q211" value="c"> c. annál kisebb, minél nagyobb a relatív hiba</label>
+                <label class="option"><input type="checkbox" name="q211" value="d"> d. megmutatja, hogy a magyarázóváltozók hány százalékban magyarázzák az eredményváltozót</label>
+                <label class="option"><input type="checkbox" name="q211" value="e"> e. értéke csökken a korrigálás révén</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(211)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback211"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="212">
+            <div class="question-text">212. Legyenek egy többváltozós regressziós elemzés változói: X1 a Mikroökonómia tárgyra fordított felkészülési napok számát mutatja, X2 a Mikroökonómia tárgy felkészülési ideje alatt szaladással (edzéssel) töltött órák száma, Y pedig a Mikroökonómia tárgyból elért vizsgapontot. A többszörös korrelációs együttható értéke 0,75. Értelmezze az együtthatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(212, 'Azt mutatja meg hogy a Mikroökonómia tárgyra fordított felkészülési napok száma és a Mikroökonómia tárgy felkészülési ideje alatt szaladással (edzéssel) töltött órák száma között szoros kapcsolat van, mivel a korrelációs együttható értéke 0,75.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback212"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="213">
+            <div class="question-text">213. Az exponenciális regressziós összefüggés:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q213" value="a"> a. lineáris segédregressziójának paraméterei: lga, b</label>
+                <label class="option"><input type="checkbox" name="q213" value="b"> b. b paramétere megmutatja, hogy a magyarázóváltozó egységnyi változása átlagosan hányszoros változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q213" value="c"> c. lineáris segédregressziójának paraméterei: lgY, lgx</label>
+                <label class="option"><input type="checkbox" name="q213" value="d"> d. lineáris segédregressziójának paraméterei: lgY, X</label>
+                <label class="option"><input type="checkbox" name="q213" value="e"> e. lineáris segédregressziójának paraméterei: lga, lgb</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(213)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback213"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="214">
+            <div class="question-text">214. Exponenciális simítás esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q214" value="a"> a. az idősorban levő tendenciát függvényillesztés nélkül határozza meg</label>
+                <label class="option"><input type="checkbox" name="q214" value="b"> b. az alfa simítási paraméter értékének a növelésével a becsült értékek grafikus képe kevésbé lesz simult (nagyobb ingadozásokat mutat)</label>
+                <label class="option"><input type="checkbox" name="q214" value="c"> c. a becsült értékek meghatározásakor a modell figyelembe veszi korábbi becslési hibáit</label>
+                <label class="option"><input type="checkbox" name="q214" value="d"> d. minél kisebb az alfa simítási paraméter értéke, az idősor közelmúltbeli értékei annál nagyobb szerepet játszanak a becsült érték meghatározásában</label>
+                <label class="option"><input type="checkbox" name="q214" value="e"> e. az idősorban levő tendenciát exponenciális regressziós függvényillesztéssel határozza meg</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(214)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback214"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="215">
+            <div class="question-text">215. A többváltozós lineáris regressziós modell esetén igaz, hogy:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q215" value="a"> a. ha egy paraméter p-értéke kisebb, mint 0,05, akkor a modell paramétere szignifikánsan különbözik nullától</label>
+                <label class="option"><input type="checkbox" name="q215" value="b"> b. a globális F-próba nullhipotézise szerint a regressziós együtthatók nem különböznek szignifikánsan nullától</label>
+                <label class="option"><input type="checkbox" name="q215" value="c"> c. a magyarázóváltozók számának a növekedése önmagában megnöveli a determinációs együttható értékét</label>
+                <label class="option"><input type="checkbox" name="q215" value="d"> d. a globális F-próba alternatív hipotézise szerint a regressziós paraméter szignifikánsan különbözik nullától</label>
+                <label class="option"><input type="checkbox" name="q215" value="e"> e. ha az F-szignifikancia kisebb, mint 0,05, akkor a modell paraméterei szignifikánsan különböznek nullától</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(215)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback215"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="216">
+            <div class="question-text">216. Legyenek egy többváltozós regressziós elemzés változói: X1 a Mikroökonómia tárgyra fordított felkészülési napok számát mutatja, X2 a Mikroökonómia tárgy felkészülési ideje alatt szaladással (edzéssel) töltött órák száma, Y pedig a Mikroökonómia tárgyból elért vizsgapontot. Az X1 és Y között számolt parciális korrelációs együttható értéke 0,45. Értelmezze ezt az együtthatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(216, 'A Mikroökonómia tárgyra fordított felkészülési napok száma és a Mikroökonómia tárgyból elért vizsgapont között egyenes és közepes erősségű kapcsolat van, kiszűrve a Mikroökonómia tárgy felkészülési ideje alatt szaladással töltött órák számának hatását a felkészülési napok számára és a Mikroökonómiából elért vizsgapontra.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback216"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="217">
+            <div class="question-text">217. Exponenciális simítás esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q217" value="a"> a. másodfokú (kétszeres) simítást lehet alkalmazni, ha az idősorban lineáris trend van és nincs szezonalitás</label>
+                <label class="option"><input type="checkbox" name="q217" value="b"> b. az idősorban levő tendenciát exponenciális regressziós függvényillesztéssel határozza meg</label>
+                <label class="option"><input type="checkbox" name="q217" value="c"> c. az idősorban levő tendenciát függvényillesztés nélkül határozza meg</label>
+                <label class="option"><input type="checkbox" name="q217" value="d"> d. az alfa simítási paraméter értékének a csökkentésével a becsült értékek grafikus képe simább lesz (kisebb ingadozásokat mutat)</label>
+                <label class="option"><input type="checkbox" name="q217" value="e"> e. az átlagos abszolút hiba számszerűsítésekor a becsült értékek és a tényleges értékek abszolút különbségének nagyságaiból kell négyzetes átlagot számolni</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(217)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback217"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="218">
+            <div class="question-text">218. Kétváltozós lineáris regressziós elemzés magyarázó változója (X) a Mikroökonómia tárgyra fordított felkészülési órák száma, eredményváltozója (Y) pedig a Mikroökonómia tárgyból elért vizsgapont. A standard hiba 0,4 pont, a két változó közötti lineáris korrelációs együttható 0,8. Mekkora a determinációs együttható? Értelmezze a determinációs együtthatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(218, 'determinációs együttható = korrelációs együttható² = 0,8² = 0,64. A mikroökonómia tárgyra fordított felkészülési órák átlagos száma 64%-ban magyarázza a mikroökonómia tárgyból elért vizsgapont varianciáját.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback218"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="219">
+            <div class="question-text">219. Additív szezonális hatás esetén:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q219" value="a"> a. a szezonális kilengések relatív nagysága állandóságot mutat</label>
+                <label class="option"><input type="checkbox" name="q219" value="b"> b. csak lineáris és polinomiális trend esetén létezhet</label>
+                <label class="option"><input type="checkbox" name="q219" value="c"> c. az idősor szabályosan hullámzik</label>
+                <label class="option"><input type="checkbox" name="q219" value="d"> d. az éven belüli szezonális kilengéseket mutató szezonindex szorzata 1</label>
+                <label class="option"><input type="checkbox" name="q219" value="e"> e. az éven belüli szezonális kilengéseket mutató szezonális eltérés összege nulla</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(219)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback219"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="220">
+            <div class="question-text">220. A determinációs együttható értéke:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q220" value="a"> a. megmutatja, hogy a magyarázóváltozó hány százalékban magyarázza az eredményváltozót</label>
+                <label class="option"><input type="checkbox" name="q220" value="b"> b. függ az eredményváltozó tényleges értékeinek és becsült értékeinek különbségétől</label>
+                <label class="option"><input type="checkbox" name="q220" value="c"> c. annál nagyobb, minél kisebb a relatív hiba</label>
+                <label class="option"><input type="checkbox" name="q220" value="d"> d. függ az eredményváltozó tényleges értékeinek számtani átlagának különbségétől</label>
+                <label class="option"><input type="checkbox" name="q220" value="e"> e. függ az eredményváltozó tényleges értékeinek és becsült értékeinek összegétől</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(220)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback220"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="221">
+            <div class="question-text">221. Ismerjük az alábbi regressziós összefüggést: Y^=2+0,04x, ahol X a Mikroökonómia tárgyra fordított felkészülési órák számát mutatja, Y a Mikroökonómia tárgyból elért vizsgapontot mutatja. A regresszió standard hibája 0,2 pont. Értelmezze a standard hiba mutatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(221, 'A mikroökonómia tárgyból elért vizsgapont becsült értékei átlagosan 0,2 ponttal térnek el a Mikroökonómia tárgyból elért vizsgapontok tényleges értékeitől.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback221"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="222">
+            <div class="question-text">222. A kétváltozós exponenciális regressziós összefüggés b paramétere:</div>
+            <div class="options">
+                <label class="option"><input type="checkbox" name="q222" value="a"> a. megmutatja, hogy a magyarázóváltozó egységnyi változása átlagosan hányszoros változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q222" value="b"> b. megmutatja, hogy a magyarázóváltozó egységnyi változása átlagosan mekkora változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q222" value="c"> c. megegyezik a regressziós függvény meredekségével</label>
+                <label class="option"><input type="checkbox" name="q222" value="d"> d. megmutatja, hogy a magyarázóváltozó egy százalékos változása átlagosan hány százalékos változást idéz elő az eredményváltozó értékében</label>
+                <label class="option"><input type="checkbox" name="q222" value="e"> e. értéke szignifikánsan különbözik nullától, ha a lineáris segédregresszió paramétertesztjének a p értéke kisebb, mint 0,01</label>
+            </div>
+            <button class="submit-btn" onclick="checkQuestion(222)">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback222"></div>
+        </div>
+        
+        <div class="question third-exam" data-question="223">
+            <div class="question-text">223. Kétváltozós lineáris regressziós elemzés magyarázó változója (X) a Mikroökonómia tárgyra fordított felkészülési órák száma, eredményváltozója (Y) pedig a Mikroökonómia tárgyból elért vizsgapont. Tudjuk, hogy a magyarázóváltozó átlagos értéke 100 óra, szórásnégyzete 400 óra², az eredményváltozó átlagos értéke 6 pont, szórásnégyzete pedig 1 pont². A két változó kovarianciájának értéke: 14 (óra*pont). Mekkora a regressziós együttható (b)? Értelmezze a regressziós együtthatót!</div>
+            <textarea class="answer-input" placeholder="Írja be a válaszát..."></textarea>
+            <button class="submit-btn" onclick="checkOpenQuestion(223, '0,035 a b együttható. Ha a Mikroökonómia tárgyra fordított átlagos felkészülési órák száma nő egy órával, akkor a mikroökonómia tárgyból elért vizsgapont átlagosan 0,035 ponttal nő.')">Válasz elküldése</button>
+            <button class="next-btn" onclick="nextQuestion()">Következő kérdés</button>
+            <div class="feedback" id="feedback223"></div>
+        </div>
+        
         <div class="final-result" id="finalResult"></div>
     </div>
     
     <script>
         // Helyes válaszok definiálása
-        const correctAnswers = {
+        const correctAnswersElso = {
+            101: 'open',
+            102: ['d', 'e'],
+            103: ['a', 'c', 'e'],
+            104: ['b', 'd'],
+            105: ['b', 'c'],
+            106: ['a', 'b', 'd'],
+            107: 'open',
+            108: ['c'],
+            109: ['a', 'c', 'e'],
+            110: 'open',
+            111: 'open',
+            112: ['b', 'c'],
+            113: 'open',
+            114: ['a', 'c', 'd', 'e'],
+            115: ['a'],
+            116: ['b', 'd', 'e'],
+            117: ['b', 'd'],
+            118: 'open',
+            119: ['b', 'e'],
+            120: ['b', 'd'],
+            121: ['c', 'd', 'e'],
+            122: ['a', 'b', 'c']
+        };
+        
+        const correctAnswersMasodik = {
             1: ['a'],
             2: ['a', 'e'],
             3: ['a', 'b'],
@@ -382,15 +1006,141 @@
             13: ['a', 'b']
         };
         
+        const correctAnswersHarmadik = {
+            201: ['a', 'e'],
+            202: ['b', 'd', 'e'],
+            203: ['a', 'c'],
+            204: ['a', 'b', 'd'],
+            205: ['a', 'b', 'd'],
+            206: ['a', 'b', 'e'],
+            207: ['a', 'b'],
+            208: ['a', 'e'],
+            209: ['d', 'e'],
+            210: 'open',
+            211: ['b', 'd', 'e'],
+            212: 'open',
+            213: ['a', 'b', 'd'],
+            214: ['a', 'b', 'c'],
+            215: ['a', 'b', 'c', 'e'],
+            216: 'open',
+            217: ['a', 'c', 'd'],
+            218: 'open',
+            219: ['c', 'e'],
+            220: ['a', 'b', 'c'],
+            221: 'open',
+            222: ['a', 'e'],
+            223: 'open'
+        };
+        
+        let correctAnswers = correctAnswersElso;
+        let currentExam = 'elso';
         let answeredQuestions = new Set();
         let correctCount = 0;
         let currentQuestion = 1;
         let questionOrder = [];
         
+        // Vizsga betöltése
+        function loadExam() {
+            const selectedExam = document.querySelector('input[name="exam"]:checked').value;
+            currentExam = selectedExam;
+            
+            // Reset state
+            answeredQuestions = new Set();
+            correctCount = 0;
+            currentQuestion = 1;
+            
+            // Hide all questions
+            const allQuestions = document.querySelectorAll('.question');
+            allQuestions.forEach(q => {
+                q.classList.remove('active');
+                q.style.display = 'none';
+                // Reset feedback
+                const feedback = q.querySelector('.feedback');
+                if (feedback) {
+                    feedback.style.display = 'none';
+                    feedback.className = 'feedback';
+                }
+                // Enable checkboxes again
+                const checkboxes = q.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => {
+                    cb.disabled = false;
+                    cb.checked = false;
+                });
+                // Reset textareas
+                const textareas = q.querySelectorAll('textarea');
+                textareas.forEach(ta => ta.value = '');
+                // Show submit button, hide next button
+                const submitBtn = q.querySelector('.submit-btn');
+                const nextBtn = q.querySelector('.next-btn');
+                if (submitBtn) submitBtn.style.display = 'block';
+                if (nextBtn) nextBtn.style.display = 'none';
+            });
+            
+            // Hide final result
+            document.getElementById('finalResult').style.display = 'none';
+            
+            if (selectedExam === 'elso') {
+                correctAnswers = correctAnswersElso;
+                // Hide other exam questions
+                const masodikQuestions = document.querySelectorAll('.question:not(.second-exam):not(.third-exam)');
+                masodikQuestions.forEach(q => q.style.display = 'none');
+                const harmadikQuestions = document.querySelectorAll('.question.third-exam');
+                harmadikQuestions.forEach(q => q.style.display = 'none');
+                // Show first exam questions (101-122)
+                const elsoQuestions = document.querySelectorAll('.question.second-exam');
+                elsoQuestions.forEach(q => q.style.display = '');
+            } else if (selectedExam === 'masodik') {
+                correctAnswers = correctAnswersMasodik;
+                // Hide other exam questions
+                const elsoQuestions = document.querySelectorAll('.question.second-exam');
+                elsoQuestions.forEach(q => q.style.display = 'none');
+                const harmadikQuestions = document.querySelectorAll('.question.third-exam');
+                harmadikQuestions.forEach(q => q.style.display = 'none');
+                // Show second exam questions (1-13)
+                const masodikQuestions = document.querySelectorAll('.question:not(.second-exam):not(.third-exam)');
+                masodikQuestions.forEach(q => q.style.display = '');
+            } else {
+                correctAnswers = correctAnswersHarmadik;
+                // Hide other exam questions
+                const elsoQuestions = document.querySelectorAll('.question.second-exam');
+                elsoQuestions.forEach(q => q.style.display = 'none');
+                const masodikQuestions = document.querySelectorAll('.question:not(.second-exam):not(.third-exam)');
+                masodikQuestions.forEach(q => q.style.display = 'none');
+                // Show third exam questions (201-223)
+                const harmadikQuestions = document.querySelectorAll('.question.third-exam');
+                harmadikQuestions.forEach(q => q.style.display = '');
+            }
+            
+            generateRandomOrder();
+            showQuestion(questionOrder[0]);
+        }
+        
+        // Nyitott kérdések ellenőrzése
+        function checkOpenQuestion(questionNumber, correctAnswer) {
+            if (answeredQuestions.has(questionNumber)) {
+                return;
+            }
+            
+            const feedbackDiv = document.getElementById(`feedback${questionNumber}`);
+            const currentQ = document.querySelector(`.question[data-question="${questionNumber}"]`);
+            const textarea = currentQ.querySelector('textarea');
+            
+            feedbackDiv.className = 'feedback correct';
+            feedbackDiv.innerHTML = '✓ A helyes válasz: <div class="correct-answer">' + correctAnswer + '</div>';
+            feedbackDiv.style.display = 'block';
+            
+            textarea.disabled = true;
+            answeredQuestions.add(questionNumber);
+            correctCount++; // Automatically count as correct for open questions
+            
+            event.target.style.display = 'none';
+            const nextBtn = currentQ.querySelector('.next-btn');
+            nextBtn.style.display = 'block';
+        }
+        
         // Véletlen sorrend generálása
         function generateRandomOrder() {
-            const totalQuestions = Object.keys(correctAnswers).length;
-            questionOrder = Array.from({length: totalQuestions}, (_, i) => i + 1);
+            questionOrder = Object.keys(correctAnswers).map(Number);
             
             // Fisher-Yates shuffle
             for (let i = questionOrder.length - 1; i > 0; i--) {
@@ -401,8 +1151,7 @@
         
         // Első kérdés megjelenítése
         document.addEventListener('DOMContentLoaded', function() {
-            generateRandomOrder();
-            showQuestion(questionOrder[0]);
+            loadExam();
         });
         
         function showQuestion(questionNumber) {
